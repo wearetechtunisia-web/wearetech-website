@@ -564,7 +564,7 @@ section {
 .portfolio-note .eyebrow { display: none; }
 
 .team-section { background: var(--white); }
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); justify-content: center; }
+.team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: center; justify-items: center; gap: 24px; }
 .team-card {
   position: relative;
   width: 80%;
@@ -587,10 +587,12 @@ section {
   background: var(--glass-control-bg);
   transition: transform .5s;
 }
-.team-card__title { padding: 5px 15px; font-size: var(--h3-size); transition-delay: .5s; }
+.team-card__title { padding: 8px 15px; font-size: var(--h3-size); line-height: 1.15; transition-delay: .5s; }
+.team-card__title span { display: block; margin-top: 3px; color: rgba(255,255,255,.85); font-family: "nunito", sans-serif; font-size: var(--small-size); font-weight: 700; line-height: 1.35; }
 .team-card__info { height: 60%; padding: 15px; overflow: auto; transform: translateY(100%); }
 .team-card__info h3 { margin: 0 0 10px; color: var(--white); font-size: var(--h3-size); font-weight: 400; }
 .team-card__info p { color: var(--white); }
+.team-card__info .team-card__role { margin: 0 0 10px; font-size: var(--small-size); font-weight: 700; }
 .team-card:hover > img { transform: translateY(-25%) scale(1.1); }
 .team-card:hover .team-card__title { transform: translateY(100%); transition-delay: 0s; }
 .team-card:hover .team-card__info { transform: none; }

@@ -4,6 +4,7 @@ const whatsapp = "https://wa.me/21695585858";
 const mapsUrl = "https://maps.app.goo.gl/LwGmWfTgHMdCBjR16";
 const email = "wearetechtunisia@gmail.com";
 const address = "Route Bouzayen Km 4,5, Sfax, Tunisie";
+const teamSectionEnabled = false; // Re-enable when the full team roster is ready.
 
 const services = [
   ["01", "Sponsoring & publicité digitale", "Des campagnes ciblées pour faire connaître votre marque et toucher les bonnes personnes.", "bi-megaphone"],
@@ -72,25 +73,24 @@ function blogCards() {
 
 function teamCards() {
   const team = [
-    ["Stratégie & média", "Faire le lien entre vos objectifs, votre audience et les bons canaux.", "photo-1534528741775-53994a69daeb", "Portrait d'une professionnelle de la communication"],
-    ["Création & contenu", "Donner une forme juste à vos idées, de l’identité aux contenus visuels.", "photo-1500648767791-00dcc994a43e", "Portrait d'un créatif"],
-    ["Technologie & expérience", "Construire des outils fiables, accessibles et agréables à utiliser.", "photo-1517841905240-472988babdf9", "Portrait d'une professionnelle du numérique"]
+    ["Melek Bahloul", "Développeur Web & Mobile", "Transformer vos idées en solutions digitales performantes et innovantes.", "assets/images/melek-bahloul.jpg", "Portrait de Melek Bahloul dans un bureau We Are Tech"],
+    ["Salma Karra", "Responsable Marketing & Stratégie", "Faire le lien entre vos objectifs, votre audience et les bonnes stratégies.", "assets/images/salma-karra.jpg", "Portrait de Salma Karra dans un bureau We Are Tech"]
   ];
-  return team.map(([role, copy, photo, alt]) => `<article class="team-card" data-reveal><img src="${image(photo, 750)}" alt="${alt}" loading="lazy"><h3 class="team-card__title ff-damion">${role}</h3><div class="team-card__info"><h3 class="ff-damion">${role}</h3><p>${copy}</p><a class="text-link text-link--light" href="contact.html">Parlons-en <span aria-hidden="true">↗</span></a></div></article>`).join("");
+  return team.map(([name, role, copy, photo, alt]) => `<article class="team-card" data-reveal><img src="${photo}" alt="${alt}" loading="lazy"><h3 class="team-card__title ff-damion">${name}<span>${role}</span></h3><div class="team-card__info"><h3 class="ff-damion">${name}</h3><p class="team-card__role">${role}</p><p>${copy}</p><a class="text-link text-link--light" href="contact.html">Parlons-en <span aria-hidden="true">↗</span></a></div></article>`).join("");
 }
 
 function renderHeader(active) {
   return `<nav class="site-header glass-nav" aria-label="Navigation principale"><div class="contained">
     <a class="brand" href="index.html" aria-label="We Are Tech — Accueil"><span class="brand__crop"><img src="assets/images/we-are-tech-logo-color.png" alt=""></span></a>
     <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><i class="bi bi-list" aria-hidden="true"></i></button>
-    <div class="main-nav"><div class="main-nav__links">${navItems.map(([label, href, page, icon]) => `<a href="${href}"${active === page ? ' aria-current="page"' : ""}><i class="bi ${icon}" aria-hidden="true"></i><span>${label}</span></a>`).join("")}</div></div>
+    <div class="main-nav"><div class="main-nav__links">${navItems.filter(([, , page]) => teamSectionEnabled || page !== "team").map(([label, href, page, icon]) => `<a href="${href}"${active === page ? ' aria-current="page"' : ""}><i class="bi ${icon}" aria-hidden="true"></i><span>${label}</span></a>`).join("")}</div></div>
   </div></nav>`;
 }
 
 function renderFooter() {
   return `<footer class="site-footer"><div class="footer-main">
     <div class="footer-brand"><a class="brand brand--footer" href="index.html" aria-label="We Are Tech — Accueil"><span class="brand__crop"><img src="assets/images/we-are-tech-logo-color.png" alt=""></span></a><p>Des idées claires. Des solutions utiles. Un accompagnement proche de vous.</p></div>
-    <div class="footer-column"><h2>Explorer</h2><a href="about.html">À propos</a><a href="services.html">Nos services</a><a href="portfolio.html">Réalisations</a><a href="team.html">Notre équipe</a><a href="blog.html">Blog & actualités</a></div>
+    <div class="footer-column"><h2>Explorer</h2><a href="about.html">À propos</a><a href="services.html">Nos services</a><a href="portfolio.html">Réalisations</a>${teamSectionEnabled ? '<a href="team.html">Notre équipe</a>' : ""}<a href="blog.html">Blog & actualités</a></div>
     <div class="footer-column"><h2>Parlons ensemble</h2><a href="tel:+21695585858">${phone}</a><a href="tel:+21695615959">+216 95 615 959</a><a href="mailto:${email}">${email}</a><a href="${mapsUrl}" target="_blank" rel="noreferrer">${address}</a><a href="https://instagram.com/WeAreTech.tn" target="_blank" rel="noreferrer">Instagram @WeAreTech.tn ↗</a></div>
     <div class="footer-note"><span class="eyebrow">Votre prochain pas</span><h2>Une idée en tête&nbsp;?</h2>${button("Échangeons", "contact.html", true)}</div>
   </div><div class="footer-bottom"><span>© ${new Date().getFullYear()} We Are Tech Digital Services</span><span>Sfax, Tunisie <span class="footer-dot">•</span> Fait avec intention.</span><a href="#top">Retour en haut ↑</a></div></footer>`;
@@ -121,7 +121,7 @@ function homePage() {
     <section class="services-section section-pad glass-surface" id="services">${sectionTitle("", "Services", "Des expertises complémentaires, pensées pour répondre à vos besoins réels.")}<div class="service-grid">${serviceCards(6)}</div><div class="section-action">${button("Voir les 9 expertises", "services.html", true)}</div></section>
     <section class="why-section section-pad">${sectionTitle("", "Pourquoi choisir We Are Tech")}<div class="why-photo" role="img" aria-label="Équipe en pleine séance de travail" style="background-image:url('${image("photo-1521737711867-e3b97375f902", 1500)}')"></div><div class="why-content" data-reveal><h2>Vos objectifs.<br>Notre terrain de jeu.</h2><p>Nous croyons aux solutions qui font vraiment la différence : bien pensées, adaptées à votre réalité et accompagnées par des personnes à l’écoute.</p><div class="why-points"><div><span>01</span><p><strong>Clair dès le départ</strong><br>Une méthode simple, des échanges transparents.</p></div><div><span>02</span><p><strong>Créé pour vous</strong><br>Des réponses sur mesure, jamais du prêt-à-porter.</p></div><div><span>03</span><p><strong>Proches à chaque étape</strong><br>Un partenaire présent, du conseil au lancement.</p></div></div>${button("Découvrir notre approche", "about.html")}</div></section>
     <section class="work-section section-pad" id="realisations">${sectionTitle("", "Nos réalisations", "Quelques univers pour illustrer l’étendue de nos expertises. Vous avez un projet en tête ?")}<div class="project-grid">${projectCards()}</div><div class="section-action">${button("Parlons de votre projet", "contact.html")}</div></section>
-    <section class="team-section section-pad" id="equipe">${sectionTitle("", "Notre équipe", "Stratégie, création, technologie : nos compétences s’unissent autour de votre projet.")}<div class="team-grid">${teamCards()}</div><div class="section-action">${button("Découvrir notre équipe", "team.html")}</div></section>
+    ${teamSectionEnabled ? `<section class="team-section section-pad" id="equipe">${sectionTitle("", "Notre équipe", "Stratégie, création, technologie : nos compétences s’unissent autour de votre projet.")}<div class="team-grid">${teamCards()}</div><div class="section-action">${button("Découvrir notre équipe", "team.html")}</div></section>` : ""}
     <section class="quote-section">${sectionTitle("", "Témoignages clients")}<span class="quote-mark" aria-hidden="true">“</span><p>La confiance se construit à chaque échange, se nourrit de transparence et grandit avec chaque projet mené ensemble.</p></section>
     <section class="blog-section section-pad" id="blog">${sectionTitle("", "Blog", "Conseils pratiques et inspirations pour avancer sereinement dans le digital.")}<div class="article-grid">${blogCards()}</div><div class="section-action">${button("Lire le blog", "blog.html")}</div></section>
     <section class="contact-band section-pad glass-surface" id="contact"><div class="contact-band__copy" data-reveal><span class="eyebrow eyebrow--light">07 — On en parle ?</span><h2>Et si on faisait<br><em>avancer votre idée ?</em></h2><p>Parlez-nous de vos objectifs. Nous vous aiderons à trouver la bonne prochaine étape.</p><a class="contact-line" href="tel:+21695585858">${phone} <span aria-hidden="true">↗</span></a><a class="contact-line" href="mailto:${email}">${email} <span aria-hidden="true">↗</span></a></div><div class="contact-band__form glass-surface glass-surface--light" data-reveal>${contactForm(true)}</div></section>
@@ -133,7 +133,7 @@ function aboutPage() {
     ${renderHeader("about")}<div id="content"><section class="about-story section-pad">${sectionTitle("", "À propos")}<div class="about-story__image" data-reveal><img src="${image("photo-1524758631624-e2822e304c36", 1200)}" alt="Un lieu de travail ouvert et lumineux" loading="lazy"><img src="assets/svg/blob.svg" alt="" class="blob"><img src="${image("photo-1497366754035-f200968a6e72", 1000)}" alt="Un espace collaboratif pour imaginer des projets" loading="lazy"></div><div class="about-story__copy" data-reveal><span class="eyebrow">Notre histoire</span><h2>Simplifier le digital pour tous.</h2><p>Le digital évolue vite. Pour beaucoup d’entreprises, savoir par où commencer — et comment continuer — n’est pas toujours évident.</p><p>We Are Tech Digital Services est née de cette conviction : chacun devrait pouvoir accéder à des outils numériques utiles, compréhensibles et adaptés à son quotidien. Depuis Sfax, nous rassemblons stratégie, création et développement pour accompagner vos ambitions avec un vrai sens du service.</p>${button("Découvrir nos services", "services.html")}</div></section>
     <section class="values-section section-pad">${sectionTitle("", "Nos valeurs")}<div class="values-grid"><article data-reveal><span>01</span><h3>La clarté</h3><p>Des conseils compréhensibles et des choix expliqués, pour avancer en confiance.</p></article><article data-reveal><span>02</span><h3>La créativité</h3><p>Des idées fraîches et cohérentes, toujours au service de vos objectifs.</p></article><article data-reveal><span>03</span><h3>La proximité</h3><p>Une relation humaine et un accompagnement attentif à chaque étape.</p></article></div></section>
     <section class="about-callout glass-surface"><span class="eyebrow eyebrow--light">L’essentiel en une phrase</span><p>Le bon digital n’est pas forcément plus compliqué.<br><em>Il doit surtout être fait pour vous.</em></p>${button("Faisons connaissance", "contact.html", true)}</section>
-    <section class="team-section section-pad">${sectionTitle("Des expertises complémentaires", "Notre équipe")}<div class="team-grid">${teamCards()}</div></section></div></main>`;
+    ${teamSectionEnabled ? `<section class="team-section section-pad">${sectionTitle("Des expertises complémentaires", "Notre équipe")}<div class="team-grid">${teamCards()}</div></section>` : ""}</div></main>`;
 }
 
 function servicesPage() {
@@ -171,12 +171,13 @@ function contactPage() {
 }
 
 const page = document.body.dataset.page || "home";
+if (!teamSectionEnabled && page === "team") window.location.replace("index.html");
 const content = {
   home: homePage,
   about: aboutPage,
   services: servicesPage,
   portfolio: portfolioPage,
-  team: teamPage,
+  team: teamSectionEnabled ? teamPage : homePage,
   blog: blogPage,
   contact: contactPage
 };
