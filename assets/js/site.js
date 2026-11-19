@@ -19,14 +19,14 @@ const services = [
 ];
 
 const projects = [
-  { title: "Identité de marque", type: "Direction artistique · Branding", photo: "photo-1558655146-d09347e92766", alt: "Création graphique et supports de marque" },
-  { title: "Campagne digitale", type: "Contenu · Réseaux sociaux", photo: "photo-1611162617474-5b21e879e113", alt: "Contenu créatif pour une campagne digitale" },
-  { title: "Expérience web", type: "Web design · Développement", photo: "photo-1460925895917-afdab827c52f", alt: "Interface web affichée sur un ordinateur portable" }
+  { title: "Marketing Digital", type: "Montage vidéo professionnel et design graphique.", photo: "assets/images/project-brand-identity.jpg", alt: "Création graphique et supports de marque" },
+  { title: "Identité de marque", type: "Création de logos et d’identités visuelles uniques et professionnelles.", photo: "assets/images/project-digital-campaign.jpg", alt: "Contenu créatif pour une campagne digitale" },
+  { title: "Développement Web et mobile", type: "Création de sites web et d’applications mobiles modernes et performants.", photo: "assets/images/project-web-experience.jpg", alt: "Interface web affichée sur un ordinateur portable" }
 ];
 
 const articles = [
-  { title: "Une identité visuelle qui vous ressemble", category: "Design & marque", time: "5 min de lecture", photo: "photo-1455390582262-044cdead277a", alt: "Carnet de notes ouvert sur un bureau" },
-  { title: "Les bons réflexes pour vos réseaux sociaux", category: "Communication digitale", time: "4 min de lecture", photo: "photo-1611162616305-c69b3fa7fbe0", alt: "Téléphone affichant un réseau social" },
+  { title: "Une identité visuelle qui vous ressemble", category: "Design & marque", time: "5 min de lecture", photo: "assets/images/blog-brand-identity.jpg", alt: "Espace de travail dédié à la stratégie digitale et à la création d’identité visuelle" },
+  { title: "Les bons réflexes pour vos réseaux sociaux", category: "Communication digitale", time: "4 min de lecture", photo: "assets/images/blog-social-media.jpg", alt: "Espace de travail dédié à la stratégie digitale et aux réseaux sociaux" },
   { title: "Un site web utile, avant tout", category: "Web & expérience", time: "6 min de lecture", photo: "photo-1498050108023-c5249f4df085", alt: "Développement d'un site web sur ordinateur" }
 ];
 
@@ -58,7 +58,7 @@ function serviceCards(limit = services.length) {
 function projectCards() {
   return projects.map((project, index) => `
     <article class="project-card project-card--${index + 1}" data-reveal>
-      <a href="contact.html#contact-form" class="project-card__image"><img src="${image(project.photo, 1100)}" alt="${project.alt}" loading="lazy"><span class="project-card__arrow" aria-hidden="true">↗</span></a>
+      <a href="contact.html#contact-form" class="project-card__image"><img src="${project.photo}" alt="${project.alt}" loading="lazy"><span class="project-card__arrow" aria-hidden="true">↗</span></a>
       <div class="project-card__meta"><div><span class="eyebrow">${project.type}</span><h3>${project.title}</h3></div><span class="project-card__index">0${index + 1}</span></div>
     </article>`).join("");
 }
@@ -66,7 +66,7 @@ function projectCards() {
 function blogCards() {
   return articles.map((article, index) => `
     <article class="article-card" data-reveal>
-      <a class="article-card__image" href="blog.html#article-${index + 1}" aria-label="Lire : ${article.title}"><img src="${image(article.photo, 850)}" alt="${article.alt}" loading="lazy"><span class="article-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="article-card__image" href="blog.html#article-${index + 1}" aria-label="Lire : ${article.title}"><img src="${article.photo.startsWith("assets/") ? article.photo : image(article.photo, 850)}" alt="${article.alt}" loading="lazy"><span class="article-card__arrow" aria-hidden="true">↗</span></a>
       <div class="article-card__body"><div class="article-card__meta"><span>${article.category}</span><span>${article.time}</span></div><h3><a href="blog.html#article-${index + 1}">${article.title}</a></h3><a class="text-link" href="blog.html#article-${index + 1}">Lire l’article <span aria-hidden="true">↗</span></a></div>
     </article>`).join("");
 }
@@ -119,7 +119,7 @@ function homePage() {
     ${renderHeader("home")}
     <section class="intro section-wrap" id="about">${sectionTitle("", "À propos")}<div class="intro__copy" data-reveal><h2>Le numérique devrait ouvrir des portes, pas compliquer les choses.</h2><p>We Are Tech accompagne les marques, les entrepreneurs et les organisations dans leurs projets digitaux. De la première idée à sa mise en œuvre, nous réunissons les bonnes expertises pour avancer simplement.</p><p>Un partenaire de proximité, à Sfax et partout où vos idées nous emmènent.</p>${button("En savoir plus", "about.html")}</div><div class="intro__image sticky-img-dual" data-reveal><img src="${image("photo-1524758631624-e2822e304c36", 1000)}" alt="Espace de travail lumineux dédié à la création" loading="lazy"><img src="assets/svg/blob.svg" alt="" class="blob"><img src="${image("photo-1497366754035-f200968a6e72", 1000)}" alt="Équipe We Are Tech en collaboration autour d’un projet" loading="lazy"></div><div class="sticky-img-dual-spacer" aria-hidden="true"></div></section>
     <section class="services-section section-pad glass-surface" id="services">${sectionTitle("", "Services", "Des expertises complémentaires, pensées pour répondre à vos besoins réels.")}<div class="service-grid">${serviceCards(6)}</div><div class="section-action">${button("Voir les 9 expertises", "services.html", true)}</div></section>
-    <section class="why-section section-pad">${sectionTitle("", "Pourquoi choisir We Are Tech")}<div class="why-photo" role="img" aria-label="Équipe en pleine séance de travail" style="background-image:url('${image("photo-1521737711867-e3b97375f902", 1500)}')"></div><div class="why-content" data-reveal><h2>Vos objectifs.<br>Notre terrain de jeu.</h2><p>Nous croyons aux solutions qui font vraiment la différence : bien pensées, adaptées à votre réalité et accompagnées par des personnes à l’écoute.</p><div class="why-points"><div><span>01</span><p><strong>Clair dès le départ</strong><br>Une méthode simple, des échanges transparents.</p></div><div><span>02</span><p><strong>Créé pour vous</strong><br>Des réponses sur mesure, jamais du prêt-à-porter.</p></div><div><span>03</span><p><strong>Proches à chaque étape</strong><br>Un partenaire présent, du conseil au lancement.</p></div></div>${button("Découvrir notre approche", "about.html")}</div></section>
+    <section class="why-section section-pad">${sectionTitle("", "Pourquoi choisir We Are Tech")}<div class="why-photo" role="img" aria-label="Équipe en pleine séance de travail" style="background-image:url('assets/images/why-we-choose.jpg')"></div><div class="why-content" data-reveal><h2>Vos objectifs.<br>Notre terrain de jeu.</h2><p>Nous croyons aux solutions qui font vraiment la différence : bien pensées, adaptées à votre réalité et accompagnées par des personnes à l’écoute.</p><div class="why-points"><div><span>01</span><p><strong>Clair dès le départ</strong><br>Une méthode simple, des échanges transparents.</p></div><div><span>02</span><p><strong>Créé pour vous</strong><br>Des réponses sur mesure, jamais du prêt-à-porter.</p></div><div><span>03</span><p><strong>Proches à chaque étape</strong><br>Un partenaire présent, du conseil au lancement.</p></div></div>${button("Découvrir notre approche", "about.html")}</div></section>
     <section class="work-section section-pad" id="realisations">${sectionTitle("", "Nos réalisations", "Quelques univers pour illustrer l’étendue de nos expertises. Vous avez un projet en tête ?")}<div class="project-grid">${projectCards()}</div><div class="section-action">${button("Parlons de votre projet", "contact.html")}</div></section>
     ${teamSectionEnabled ? `<section class="team-section section-pad" id="equipe">${sectionTitle("", "Notre équipe", "Stratégie, création, technologie : nos compétences s’unissent autour de votre projet.")}<div class="team-grid">${teamCards()}</div><div class="section-action">${button("Découvrir notre équipe", "team.html")}</div></section>` : ""}
     <section class="quote-section">${sectionTitle("", "Témoignages clients")}<span class="quote-mark" aria-hidden="true">“</span><p>La confiance se construit à chaque échange, se nourrit de transparence et grandit avec chaque projet mené ensemble.</p></section>
@@ -161,7 +161,7 @@ function blogPage() {
     "Avant de choisir une technologie, clarifiez le besoin de vos utilisateurs. Les questions essentielles pour concevoir un site vraiment utile."
   ];
   return `<main id="top">${pageHero("Blog & actualités", "Des idées fraîches<br><em>pour votre quotidien digital.</em>", "Des conseils accessibles et des pistes concrètes pour faire les bons choix numériques.", "photo-1498050108023-c5249f4df085")}
-    ${renderHeader("blog")}<div id="content"><section class="blog-page section-pad">${sectionTitle("Le carnet We Are Tech", "Blog & actualités", "Nos notes et conseils pour vous aider à avancer, un sujet à la fois.")}<div class="article-grid article-grid--page">${articles.map((article, index) => `<article class="article-card article-card--full" id="article-${index + 1}" data-reveal><a class="article-card__image" href="#article-${index + 1}"><img src="${image(article.photo, 1000)}" alt="${article.alt}" loading="lazy"><span class="article-card__arrow" aria-hidden="true">↗</span></a><div class="article-card__body"><div class="article-card__meta"><span>${article.category}</span><span>${article.time}</span></div><h3>${article.title}</h3><p>${summaries[index]}</p><a class="text-link" href="contact.html">Échangeons sur ce sujet <span aria-hidden="true">↗</span></a></div></article>`).join("")}</div></section></div></main>`;
+    ${renderHeader("blog")}<div id="content"><section class="blog-page section-pad">${sectionTitle("Le carnet We Are Tech", "Blog & actualités", "Nos notes et conseils pour vous aider à avancer, un sujet à la fois.")}<div class="article-grid article-grid--page">${articles.map((article, index) => `<article class="article-card article-card--full" id="article-${index + 1}" data-reveal><a class="article-card__image" href="#article-${index + 1}"><img src="${article.photo.startsWith("assets/") ? article.photo : image(article.photo, 1000)}" alt="${article.alt}" loading="lazy"><span class="article-card__arrow" aria-hidden="true">↗</span></a><div class="article-card__body"><div class="article-card__meta"><span>${article.category}</span><span>${article.time}</span></div><h3>${article.title}</h3><p>${summaries[index]}</p><a class="text-link" href="contact.html">Échangeons sur ce sujet <span aria-hidden="true">↗</span></a></div></article>`).join("")}</div></section></div></main>`;
 }
 
 function contactPage() {
